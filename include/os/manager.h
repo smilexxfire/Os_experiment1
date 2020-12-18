@@ -24,6 +24,7 @@ class Manager{
     private:
         char running;       // 运行进程name
         char buffer[100];   // 缓冲
+        bool iit = false;   // 标识是否init
     public:
         int dealWithOrder(std::string order);   // 处理用户命令  
         int init();                             // 初始化init进程
@@ -38,8 +39,8 @@ class Manager{
         int reqSource(std::string req, pcb* cur_pcb); // 请求资源
         int relSource(std::string rel, pcb* cur_pcb); // 释放资源
         int checkDeadLock(rcb* req, pcb* cur_pcb, unsigned num);    // 检查是否可能死锁
-        int fillAllocation(char name, std::unordered_map<char, int[4]> &m);
-        int fillRequest(char name, std::unordered_map<char, int[4]> &m);
+        int fillAllocation(char name, std::unordered_map<char, int[4]> &m); // 填充Allocation矩阵
+        int fillRequest(char name, std::unordered_map<char, int[4]> &m);    // 填充Request矩阵
 };
 
 }

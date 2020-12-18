@@ -1,4 +1,18 @@
+# 死锁检测测试
 init
-cr x 1
-cr y 1
-req R1 4
+cr a 1
+cr b 1
+cr c 1
+cr d 1
+req R1 3
+to
+req R2 3
+to
+req R3 3
+to
+req R4 3
+to
+req R2 3
+req R3 3
+req R4 3
+req R1 3

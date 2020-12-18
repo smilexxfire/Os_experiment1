@@ -59,6 +59,7 @@ int Manager::scheduler()
 
 int Manager::relSource(std::string rel, pcb* cur_pcb)
 {
+    if(iit == false)    {printf("You need to init\n"); return S_FALSE;}
     // 获取释放资源的rcb
     std::string rid = rel.substr(0,2);
     if(g_rcb_map.count(rid) == 0)   return S_FALSE;
@@ -119,6 +120,7 @@ int Manager::relSource(std::string rel, pcb* cur_pcb)
 
 int Manager::reqSource(std::string req, pcb* cur_pcb)
 {
+    if(iit == false)    {printf("You need to init\n"); return S_FALSE;}
     // 获取请求资源的rcb
     std::string rid = req.substr(0,2);
     if(g_rcb_map.count(rid) == 0)   return S_FALSE;
@@ -332,6 +334,7 @@ int Manager::del(char name)
 
 int Manager::create(std::string order)
 {
+    if(iit == false)    {printf("You need to init\n"); return S_FALSE;}
     pcb* new_pcb = new pcb;
     // 初始化PCB结构
     new_pcb->pid = g_pid++;
@@ -397,6 +400,7 @@ int Manager::init()
     running = '\0';             // init进程name为\0
     g_pcb_map['\0'] = g_pcb;
 
+    iit = true;
     //输出
     printf("init process is running\n");
 
@@ -462,6 +466,7 @@ int Manager::checkDeadLock(rcb* req, pcb* cur_pcb, unsigned num)
         ite++;
     }
 
+    // 是否有未标记的进程
     for(auto i = sign_m.begin(); i != sign_m.end(); i++)
         if(i->second == false)  return S_FALSE;
 
